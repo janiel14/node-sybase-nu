@@ -1,53 +1,35 @@
 {
-  "_from": "node-sybase@^1.1.6",
-  "_id": "node-sybase@1.1.6",
-  "_inBundle": false,
-  "_integrity": "sha512-oXADqcnFRNOtRNxpE/ZXo6335qNHTpmm3/FS5TnnImuQd7MRviL5zpQmyFIxBg5pap2Yv+3rKQb4eMy51w/Bug==",
-  "_location": "/node-sybase",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "node-sybase@^1.1.6",
-    "name": "node-sybase",
-    "escapedName": "node-sybase",
-    "rawSpec": "^1.1.6",
-    "saveSpec": null,
-    "fetchSpec": "^1.1.6"
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/node-sybase/-/node-sybase-1.1.6.tgz",
-  "_shasum": "5a8cb41164c09ccf3e271882375042d4945b857c",
-  "_spec": "node-sybase@^1.1.6",
-  "_where": "/home/janiel/Projects/nucont/nucont-pro",
-  "author": {
-    "name": "huangbinglong & wuhao"
-  },
-  "bundleDependencies": false,
-  "dependencies": {
-    "JSONStream": "latest",
-    "generic-pool": "^3.1.7",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1",
-    "validator": "^9.0.0"
-  },
-  "deprecated": false,
-  "description": "sybasedb for node with pool and Multi DB",
-  "keywords": [
-    "sybase",
-    "dbsybase"
-  ],
-  "license": "ISC",
-  "main": "./dist/node_sybase.js",
-  "name": "node-sybase",
-  "repository": {
-    "type": "git",
-    "location": "https://github.com/kiwh77/node-sybase.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "1.1.6"
+    "name": "node-sybase-nu",
+    "version": "1.0.0",
+    "description": "packeage base in node-sybase",
+    "main": "./dist/node_sybase.js",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {
+        "JSONStream": "latest",
+        "generic-pool": "^3.1.7",
+        "lodash": "^4.17.4",
+        "moment": "^2.18.1",
+        "validator": "^9.0.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/janiel14/node-sybase-nu.git"
+    },
+    "keywords": [
+        "nodejs",
+        "sybase",
+        "node-sybase"
+    ],
+    "author": "Janiel Oliveira, huangbinglong,  wuhao",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/janiel14/node-sybase-nu/issues"
+    },
+    "homepage": "https://github.com/janiel14/node-sybase-nu#readme"
 }
