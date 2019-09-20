@@ -30,7 +30,9 @@ class DBPool {
         }
         this.name = opts.name || opts.host;
         this.client = null;
+        this.opts = opts;
 
+        /*
         const _create = () => {
             return new Promise((resolve, reject) => {
                 this.client = new DbDriver(
@@ -43,7 +45,10 @@ class DBPool {
                     opts.jarPath
                 );
                 this.client.connect((err) => {
-                    if (err) return reject(err);
+                    if (err) {
+                        console.error(err);
+                        return reject(err);
+                    }
                     return resolve(this.client);
                 });
             });
@@ -57,7 +62,6 @@ class DBPool {
                 }
             });
         };
-
         this.pool = genericPool.createPool(
             {
                 create: _create,
@@ -68,21 +72,57 @@ class DBPool {
                 min: opts.min || 2
             }
         );
+        */
+    }
+
+    connect() {
+        return new Promise((resolve, reject) => {
+            this.client = new DbDriver(
+                this.opts.host,
+                this.opts.port,
+                this.opts.dbname,
+                this.opts.username,
+                this.opts.password,
+                true,
+                this.opts.jarPath
+            );
+            this.client.connect((err) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                }
+                resolve(this.client);
+            });
+        });
+    }
+
+    disconnect() {
+        return new Promise((resolve) => {
+            if (this.client.isConnected()) {
+                this.client.disconnect();
+                resolve();
+            }
+        });
     }
 
     _exe(connect, sql) {
         return new Promise((resolve, reject) => {
-            connect.then((client) => {
-                client.query(sql, (err, data) => {
-                    if (err) {
-                        console.error("Errro on _exec: ", err);
-                        reject(err);
-                    } else {
-                        this.pool.release(client);
-                        resolve(data);
-                    }
+            connect
+                .then((client) => {
+                    client.query(sql, (err, data) => {
+                        if (err) {
+                            console.error("Erro on _exec: ", err);
+                            reject(err);
+                        } else {
+                            this.pool.release(client);
+                            resolve(data);
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error("_exec: ", error);
+                    reject(error);
                 });
-            });
         });
     }
 
@@ -93,7 +133,7 @@ class DBPool {
                     console.error("Errro on _exec: ", err);
                     reject(err);
                 } else {
-                    this.pool.release(this.client);
+                    //this.pool.release(this.client);
                     resolve(data);
                 }
             });
