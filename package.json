@@ -1,5 +1,5 @@
 {
-    "name": "node-sybase-nu",
+    "name": "@janiel14/node-sybase-nu",
     "version": "1.0.0",
     "description": "packeage base in node-sybase",
     "main": "./dist/node_sybase.js",
