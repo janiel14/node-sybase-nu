@@ -1,6 +1,6 @@
 {
     "name": "node-sybase-nu",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "packeage base in node-sybase",
     "main": "./dist/node_sybase.js",
     "directories": {
