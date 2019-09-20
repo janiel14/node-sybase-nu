@@ -75,7 +75,7 @@ class DBPool {
         */
     }
 
-    connect() {
+    _connect() {
         return new Promise((resolve, reject) => {
             this.client = new DbDriver(
                 this.opts.host,
@@ -96,7 +96,7 @@ class DBPool {
         });
     }
 
-    disconnect() {
+    _disconnect() {
         return new Promise((resolve) => {
             if (this.client.isConnected()) {
                 this.client.disconnect();
@@ -128,15 +128,22 @@ class DBPool {
 
     query(sql) {
         return new Promise((resolve, reject) => {
-            this.client.query(sql, (err, data) => {
-                if (err) {
-                    console.error("Errro on _exec: ", err);
-                    reject(err);
-                } else {
-                    //this.pool.release(this.client);
-                    resolve(data);
-                }
-            });
+            this._connect()
+                .then((conn) => {
+                    conn.query(sql, (err, data) => {
+                        this._disconnect();
+                        if (err) {
+                            console.error("Pool - query - conn.query: ", error);
+                            reject(err);
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error("Pool - query - _connect: ", error);
+                    reject(error);
+                });
         });
     }
 

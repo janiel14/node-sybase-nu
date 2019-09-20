@@ -13,7 +13,6 @@ const sybase = new SyBase([
 
 const init = async () => {
     try {
-        await sybase.DBPools.main.connect();
         const rs = await sybase.DBPools.main.query(
             "SELECT TOP 1 START AT 1 * FROM bethadba.geempre"
         );
