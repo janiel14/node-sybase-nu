@@ -86,14 +86,14 @@ class DBPool {
         });
     }
 
-    query(client, sql) {
+    query(sql) {
         return new Promise((resolve, reject) => {
-            client.query(sql, (err, data) => {
+            this.client.query(sql, (err, data) => {
                 if (err) {
                     console.error("Errro on _exec: ", err);
                     reject(err);
                 } else {
-                    this.pool.release(client);
+                    this.pool.release(this.client);
                     resolve(data);
                 }
             });
