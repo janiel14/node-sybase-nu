@@ -86,8 +86,8 @@ class DBPool {
         });
     }
 
-    async execute(sql) {
-        const connInfo = await this.pool.acquire();
+    execute(sql) {
+        const connInfo = this.pool.acquire();
         return this._exe(connInfo, sql);
     }
 }
