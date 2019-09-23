@@ -133,7 +133,7 @@ class DBPool {
                     conn.query(sql, (err, data) => {
                         this._disconnect();
                         if (err) {
-                            console.error("Pool - query - conn.query: ", error);
+                            console.error("Pool - query - conn.query: ", err);
                             reject(err);
                         } else {
                             resolve(data);
