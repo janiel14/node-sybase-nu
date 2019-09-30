@@ -21,6 +21,7 @@ public class Main implements SQLRequestListener {
 
 		Main m;
 		String pw = "";
+                String charset = "utf8";
 		if (args.length != 5 && args.length != 4)
 		{
 			System.err.println("Expecting the arguments: host, port, dbname, username, password");
@@ -28,11 +29,14 @@ public class Main implements SQLRequestListener {
 		}
 		if (args.length == 5)
 			pw = args[4];
+                
+                if (args.length == 6)
+                        charset = args[6];
 
-		m = new Main(args[0], Integer.parseInt(args[1]), args[2], args[3], pw);
+		m = new Main(args[0], Integer.parseInt(args[1]), args[2], args[3], pw, charset);
     }
 
-	public Main(String host, Integer port, String dbname, String username, String password) {
+	public Main(String host, Integer port, String dbname, String username, String password, String charset) {
 		this.host = host;
 		this.port = port;
 		this.dbname = dbname;
@@ -43,7 +47,7 @@ public class Main implements SQLRequestListener {
 		input.addListener(this);
 
 		MyProperties props = new MyProperties("sybaseConfig.properties");
-		db = new SybaseDB(host, port, dbname, username, password, props.properties);
+		db = new SybaseDB(host, port, dbname, username, password, charset, props.properties);
 		if (!db.connect())
 			System.exit(1);
 
