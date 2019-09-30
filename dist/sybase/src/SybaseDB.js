@@ -111,14 +111,16 @@ Sybase.prototype.query = function(sql, callback) {
     msg.callback = callback;
     msg.hrstart = hrstart;
 
-    console.log(
-        "this: " +
-            this +
-            " currentMessages: " +
-            this.currentMessages +
-            " this.queryCount: " +
-            this.queryCount
-    );
+    if (this.logTiming) {
+        console.log(
+            "this: " +
+                this +
+                " currentMessages: " +
+                this.currentMessages +
+                " this.queryCount: " +
+                this.queryCount
+        );
+    }
 
     this.currentMessages[msg.msgId] = msg;
 
@@ -136,7 +138,7 @@ Sybase.prototype.onSQLResponse = function(jsonMsg) {
 
     var currentTime = new Date().getTime();
     var sendTimeMS = currentTime - jsonMsg.javaEndTime;
-    hrend = process.hrtime(request.hrstart);
+    var hrend = process.hrtime(request.hrstart);
     var javaDuration = jsonMsg.javaEndTime - jsonMsg.javaStartTime;
 
     if (jsonMsg.error !== undefined) err = new Error(jsonMsg.error);
