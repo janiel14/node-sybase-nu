@@ -30,49 +30,9 @@ class DBPool {
         }
         this.name = opts.name || opts.host;
         this.client = null;
+        if (!opts.logging) opts.logging = false;
+        if (!opts.encoding) opts.encoding = "utf8";
         this.opts = opts;
-
-        /*
-        const _create = () => {
-            return new Promise((resolve, reject) => {
-                this.client = new DbDriver(
-                    opts.host,
-                    opts.port,
-                    opts.dbname,
-                    opts.username,
-                    opts.password,
-                    true,
-                    opts.jarPath
-                );
-                this.client.connect((err) => {
-                    if (err) {
-                        console.error(err);
-                        return reject(err);
-                    }
-                    return resolve(this.client);
-                });
-            });
-        };
-
-        const _destroy = (client) => {
-            return new Promise((resolve) => {
-                if (client.isConnected()) {
-                    client.disconnect();
-                    resolve();
-                }
-            });
-        };
-        this.pool = genericPool.createPool(
-            {
-                create: _create,
-                destroy: _destroy
-            },
-            {
-                max: opts.max || 10,
-                min: opts.min || 2
-            }
-        );
-        */
     }
 
     _connect() {
@@ -83,8 +43,9 @@ class DBPool {
                 this.opts.dbname,
                 this.opts.username,
                 this.opts.password,
-                true,
-                this.opts.jarPath
+                this.opts.logging,
+                this.opts.jarPath,
+                this.opts.encoding
             );
             this.client.connect((err) => {
                 if (err) {

@@ -7,7 +7,9 @@ const sybase = new SyBase([
         port: 2638,
         dbname: "contabil",
         username: "NUCONTBI",
-        password: "123456"
+        password: "123456",
+        logging: true,
+        encoding: "utf8"
     }
 ]);
 
@@ -17,7 +19,6 @@ const init = async () => {
             "SELECT TOP 1 START AT 1 * FROM bethadba.geempre"
         );
         console.log(rs[0]);
-        await sybase.DBPools.main.disconnect();
     } catch (error) {
         console.error("error fatal: ", error);
     }

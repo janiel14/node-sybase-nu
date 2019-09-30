@@ -1,123 +1,147 @@
+# Description
 
+-   Project based in node-sybase.
+-   Refactored for using modern callback
 
-## Node-sybase
+## node-sybase-nu
+
 ```
   SyBase ORM for node like Sequelize.js
 ```
+
 ---
+
 ## NPM
-  ```
-  npm install node-sybase
-  ```
+
+```
+npm install node-sybase-nu
+```
+
 ---
+
 ## Use
-  
-  * Create Models  `exemple/models/wxuser.js`
 
-  ```
-  const SyBase = require('../db')
+-   Create Models `exemple/models/wxuser.js`
 
-  module.exports = () => {
-    const { STRING, INTEGER, DATE, DECIMAL } = SyBase
+```
+const SyBase = require('../db')
 
-    return SyBase.define('WXUser', {
-      id: {
-        type: INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoInc: true
-      },
-      openid: {
-        type: STRING
-      },
-      headurl: {
-        type: STRING
-      },
-      wxname: {
-        type: STRING
-      },
-      cardno: {
-        type: STRING
-      },
-      phone: {
-        type: STRING
-      },
-      state: {
-        type: STRING,
-        defaultValue: '00'
-      },
-      regdate: {
-        type: DATE,
-        defaultValue: function () {
-          return new Date()
-        }
-      },
-    }, {
-        tableName: 't_wxuser'
-      })
-  }
-  ```
----
-  * Create DBs `exemple/db.js`
-  ```
-    // This is a exemple. Production use require('node_sybase')
-    const SyBase = require('../dist/node_sybase')
+module.exports = () => {
+  const { STRING, INTEGER, DATE, DECIMAL } = SyBase
 
-    module.exports = new SyBase([
-      {
-        name: 'main',
-        host: '10.0.0.141',
-        port: 2087,
-        dbname: 'web?charset=cp936',
-        username: 'username',
-        password: '123456'
+  return SyBase.define('WXUser', {
+    id: {
+      type: INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoInc: true
+    },
+    openid: {
+      type: STRING
+    },
+    headurl: {
+      type: STRING
+    },
+    wxname: {
+      type: STRING
+    },
+    cardno: {
+      type: STRING
+    },
+    phone: {
+      type: STRING
+    },
+    state: {
+      type: STRING,
+      defaultValue: '00'
+    },
+    regdate: {
+      type: DATE,
+      defaultValue: function () {
+        return new Date()
       }
-    ])
-  ```
+    },
+  }, {
+      tableName: 't_wxuser'
+    })
+}
+```
+
 ---
-  * Set Model Path `exemple/app.js`
-  ```
-    const SyBase = require('./db')
-    SyBase.use(__dirname + '/models')
-  ```
+
+-   Create DBs `exemple/db.js`
+
+```
+  // This is a exemple. Production use require('node_sybase')
+  const SyBase = require('../dist/node_sybase')
+
+  module.exports = new SyBase([
+    {
+      name: 'main',
+      host: '10.0.0.141',
+      port: 2087,
+      dbname: 'web?charset=cp936',
+      username: 'username',
+      password: '123456',
+      logging: true,
+      encoding: "utf8"
+    }
+  ])
+```
+
 ---
-  * Set Pool or Changed Pool
-  ```
-    Sybase.models.WXUser.by(SyBase.DBPools.main) 
-  ```
+
+-   Set Model Path `exemple/app.js`
+
+```
+  const SyBase = require('./db')
+  SyBase.use(__dirname + '/models')
+```
+
 ---
-  * CRUD
-    * findOne
-      ```
-        SyBase.models.WXUser.findOne({phone:'13888888888'}).then(res => ... ).catch(err => ...)
-      ```
-    * findById
-      ```
-        SyBase.models.WXUser.findById('123456'}).then(res => ... ).catch(err => ...)
-      ```
-    * findAll
-      ```
-        SyBase.models.WXUser.findAll({phone:'13888888888'}).then(res => ... ).catch(err => ...)
-      ```
-    * create
-      ```
-        SyBase.models.WXUser.create({phone:'13888888888', ...}).then(res => ... ).catch(err => ...)
-      ```
-    * update
-      ```
-        SyBase.models.WXUser.update({phone:'13888888888'}, {id: '123456'}).then(res => ... ).catch(err => ...)
-      ```
-    * delete
-      ```
-        SyBase.models.WXUser.delete({id:'123456'}).then(res => ... ).catch(err => ...)
-      ```
+
+-   Set Pool or Changed Pool
+
+```
+  Sybase.models.WXUser.by(SyBase.DBPools.main)
+```
+
 ---
-  * exeute Sql 
+
+-   CRUD
+    -   findOne
+        ```
+          SyBase.models.WXUser.findOne({phone:'13888888888'}).then(res => ... ).catch(err => ...)
+        ```
+    -   findById
+        ```
+          SyBase.models.WXUser.findById('123456'}).then(res => ... ).catch(err => ...)
+        ```
+    -   findAll
+        ```
+          SyBase.models.WXUser.findAll({phone:'13888888888'}).then(res => ... ).catch(err => ...)
+        ```
+    -   create
+        ```
+          SyBase.models.WXUser.create({phone:'13888888888', ...}).then(res => ... ).catch(err => ...)
+        ```
+    -   update
+        ```
+          SyBase.models.WXUser.update({phone:'13888888888'}, {id: '123456'}).then(res => ... ).catch(err => ...)
+        ```
+    -   delete
+        ```
+          SyBase.models.WXUser.delete({id:'123456'}).then(res => ... ).catch(err => ...)
+        ```
+
+---
+
+-   execute Sql
     ```
-      // Model 
+      // Model
       Sybase.models.WXuser.execSql('select * from t_wxuser').then(res => ...).catch(err => ...)
       // Pool
-      Sybase.DBPools.main.execute('select * from t_wxuser).then(res => ...).catch(err => ...)
+      Sybase.DBPools.main.query('select * from t_wxuser).then(res => ...).catch(err => ...)
     ```
 
-  about detail please See `exemple` 
+about detail please See `exemple`
