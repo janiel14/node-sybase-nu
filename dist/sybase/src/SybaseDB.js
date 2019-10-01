@@ -6,7 +6,7 @@ var fs = require("fs");
 //so that it can be called properly from parent packages.
 var PATH_TO_JAVA_BRIDGE1 =
     process.env.PWD +
-    "/node_modules/node-sybase/sybase/JavaSybaseLink/dist/JavaSybaseLink.jar";
+    "/node_modules/node-sybase-nu/dist/sybase/JavaSybaseLink/dist/JavaSybaseLink.jar";
 var PATH_TO_JAVA_BRIDGE2 =
     __dirname + "/../JavaSybaseLink/dist/JavaSybaseLink.jar";
 
@@ -54,7 +54,6 @@ Sybase.prototype.connect = function(callback) {
         this.password
     ]);
 
-    var hrstart = process.hrtime();
     this.javaDB.stdout.once("data", function(data) {
         if ((data + "").trim() != "connected") {
             callback(new Error("Error connecting " + data));
@@ -136,7 +135,7 @@ Sybase.prototype.onSQLResponse = function(jsonMsg) {
 
     var currentTime = new Date().getTime();
     var sendTimeMS = currentTime - jsonMsg.javaEndTime;
-    hrend = process.hrtime(request.hrstart);
+    var hrend = process.hrtime(request.hrstart);
     var javaDuration = jsonMsg.javaEndTime - jsonMsg.javaStartTime;
 
     if (jsonMsg.error !== undefined) err = new Error(jsonMsg.error);
