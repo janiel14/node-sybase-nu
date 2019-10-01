@@ -43,8 +43,8 @@ class DBPool {
                 this.opts.dbname,
                 this.opts.username,
                 this.opts.password,
-                this.opts.jarPath,
                 this.opts.logging,
+                this.opts.jarPath,
                 this.opts.encoding
             );
             this.client.connect((err) => {

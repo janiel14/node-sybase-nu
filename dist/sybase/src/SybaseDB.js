@@ -51,17 +51,9 @@ Sybase.prototype.connect = function(callback) {
         this.port,
         this.dbname,
         this.username,
-<<<<<<< HEAD
         this.password
     ]);
 
-=======
-        this.password,
-        this.encoding
-    ]);
-
-    var hrstart = process.hrtime();
->>>>>>> 9b685feb563a79f29ca7b7b7abfe1df5ce0501e7
     this.javaDB.stdout.once("data", function(data) {
         if ((data + "").trim() != "connected") {
             callback(new Error("Error connecting " + data));
@@ -118,16 +110,6 @@ Sybase.prototype.query = function(sql, callback) {
     msg.callback = callback;
     msg.hrstart = hrstart;
 
-<<<<<<< HEAD
-    console.log(
-        "this: " +
-            this +
-            " currentMessages: " +
-            this.currentMessages +
-            " this.queryCount: " +
-            this.queryCount
-    );
-=======
     if (this.logTiming) {
         console.log(
             "this: " +
@@ -138,7 +120,6 @@ Sybase.prototype.query = function(sql, callback) {
                 this.queryCount
         );
     }
->>>>>>> 9b685feb563a79f29ca7b7b7abfe1df5ce0501e7
 
     this.currentMessages[msg.msgId] = msg;
 
