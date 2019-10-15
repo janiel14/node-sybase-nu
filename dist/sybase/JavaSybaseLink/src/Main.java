@@ -33,6 +33,7 @@ public class Main implements SQLRequestListener {
 
 		if (args.length == 6)
 			charset = args[5];
+                        pw = args[4];
                 
 		m = new Main(args[0], Integer.parseInt(args[1]), args[2], args[3], pw, charset);
     }
