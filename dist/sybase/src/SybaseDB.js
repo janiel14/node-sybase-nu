@@ -124,8 +124,7 @@ Sybase.prototype.query = function(sql, callback) {
     this.currentMessages[msg.msgId] = msg;
 
     this.javaDB.stdin.write(strMsg + "\n");
-    if (this.logTiming) {
-        console.log("sql request written: " + strMsg);
+    if (this.logTiming) console.log("sql request written: " + strMsg);
 };
 
 Sybase.prototype.onSQLResponse = function(jsonMsg) {
