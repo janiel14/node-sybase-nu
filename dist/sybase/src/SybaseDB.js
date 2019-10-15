@@ -26,7 +26,7 @@ function Sybase(
     this.dbname = dbname;
     this.username = username;
     this.password = password;
-    this.logTiming = logTiming == true;
+    this.logTiming = logTiming;
     this.encoding = encoding;
 
     this.pathToJavaBridge = pathToJavaBridge;
@@ -124,7 +124,8 @@ Sybase.prototype.query = function(sql, callback) {
     this.currentMessages[msg.msgId] = msg;
 
     this.javaDB.stdin.write(strMsg + "\n");
-    console.log("sql request written: " + strMsg);
+    if (this.logTiming) {
+        console.log("sql request written: " + strMsg);
 };
 
 Sybase.prototype.onSQLResponse = function(jsonMsg) {
