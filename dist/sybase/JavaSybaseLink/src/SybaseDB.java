@@ -50,7 +50,7 @@ public class SybaseDB {
 		this.props = props;
 		this.props.put("user", username);
 		this.props.put("password", password);
-                this.props.put("CHARSET_CONVERTER_CLASS","com.sybase.jdbc4.utils.TruncationConverter");
+                this.props.put("CHARSET_CONVERTER_CLASS","com.sybase.jdbc3.utils.TruncationConverter");
 		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
