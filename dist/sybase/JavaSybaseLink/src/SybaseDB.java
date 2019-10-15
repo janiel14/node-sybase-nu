@@ -29,6 +29,7 @@ public class SybaseDB {
 	String dbname;
 	String username;
 	String password;
+        String charset;
 	Properties props;
 	Connection conn;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'");
@@ -36,9 +37,9 @@ public class SybaseDB {
 
 	public SybaseDB(String host, Integer port, String dbname, String username, String password)
 	{
-		this(host, port, dbname, username, password, new Properties());
+		this(host, port, dbname, username, password, new Properties(), "utf8");
 	}
-	public SybaseDB(String host, Integer port, String dbname, String username, String password, Properties props)
+	public SybaseDB(String host, Integer port, String dbname, String username, String password, Properties props, String charset)
 	{
 		this.host = host;
 		this.port = port;
@@ -47,7 +48,8 @@ public class SybaseDB {
 		this.password = password;
 		this.props = props;
 		this.props.put("user", username);
-		this.props.put("password", password);		
+		this.props.put("password", password);
+                this.props.put("charset", charset);
 		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 

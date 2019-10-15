@@ -9,7 +9,7 @@ const sybase = new SyBase([
         username: "NUCONTBI",
         password: "123456",
         logging: true,
-        encoding: "utf8"
+        encoding: "iso_1"
     }
 ]);
 

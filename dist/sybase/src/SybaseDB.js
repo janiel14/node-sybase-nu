@@ -51,7 +51,8 @@ Sybase.prototype.connect = function(callback) {
         this.port,
         this.dbname,
         this.username,
-        this.password
+        this.password,
+        this.encoding
     ]);
 
     this.javaDB.stdout.once("data", function(data) {
