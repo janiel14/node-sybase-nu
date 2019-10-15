@@ -46,10 +46,10 @@ public class SybaseDB {
 		this.dbname = dbname;
 		this.username = username;
 		this.password = password;
+                this.charset = charset;
 		this.props = props;
 		this.props.put("user", username);
 		this.props.put("password", password);
-                this.props.put("charset", charset);
 		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
@@ -57,7 +57,7 @@ public class SybaseDB {
 	{
 		try {
 			SybDriver sybDriver = (SybDriver) Class.forName("com.sybase.jdbc3.jdbc.SybDriver").newInstance();
-			conn = DriverManager.getConnection("jdbc:sybase:Tds:" + host + ":" + port + "/" + dbname, props);
+			conn = DriverManager.getConnection("jdbc:sybase:Tds:" + host + ":" + port + "/" + dbname + "?charset=" + charset, props);
 			return true;
 
 		} catch (Exception ex) {
