@@ -42,6 +42,18 @@ function Sybase(
     this.jsonParser = JSONStream.parse();
 }
 
+const setEncoding = (list = []) => {
+    list.forEach((e) => {
+        let keys = Object.keys(e);
+        keys.forEach((k) => {
+            e[k] = e[k].replace(/�\u0087/g, "Ç");
+            e[k] = e[k].replace(/�\u0095/g, "Õ");
+            e[k] = e[k].replace(/�\u0083/g, "Ã");
+        });
+    });
+    return list;
+};
+
 Sybase.prototype.connect = function(callback) {
     var that = this;
     this.javaDB = spawn("java", [
@@ -131,8 +143,9 @@ Sybase.prototype.onSQLResponse = function(jsonMsg) {
     delete this.currentMessages[jsonMsg.msgId];
 
     var result = jsonMsg.result;
-    console.log("result: ", JSON.stringify(result));
     if (result.length === 1) result = result[0]; //if there is only one just return the first RS not a set of RS's
+
+    result = setEncoding(result);
 
     var currentTime = new Date().getTime();
     var sendTimeMS = currentTime - jsonMsg.javaEndTime;
