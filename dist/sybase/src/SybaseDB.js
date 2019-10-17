@@ -57,6 +57,11 @@ const setEncoding = (list = []) => {
                 e[k] = e[k].replace(/u0087/g, "Ç");
                 e[k] = e[k].replace(/u0095/g, "Õ");
                 e[k] = e[k].replace(/u0083/g, "Ã");
+                e[k] = e[k].replace(/u0089/g, "É");
+                e[k] = e[k].replace(/u0081/g, "Á");
+                e[k] = e[k].replace(/u0093/g, "Ó");
+                e[k] = e[k].replace(/u008D/g, "Í");
+                e[k] = e[k].replace(/u008A/g, "Ê");
             }
         });
     });
