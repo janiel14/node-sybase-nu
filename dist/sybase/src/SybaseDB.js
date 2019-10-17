@@ -131,6 +131,7 @@ Sybase.prototype.onSQLResponse = function(jsonMsg) {
     delete this.currentMessages[jsonMsg.msgId];
 
     var result = jsonMsg.result;
+    console.log("result: ", JSON.stringify(result));
     if (result.length === 1) result = result[0]; //if there is only one just return the first RS not a set of RS's
 
     var currentTime = new Date().getTime();
