@@ -42,13 +42,22 @@ function Sybase(
     this.jsonParser = JSONStream.parse();
 }
 
+/**
+ * setEncoding
+ * @param {Array} list
+ * @return {Array} list
+ */
 const setEncoding = (list = []) => {
     list.forEach((e) => {
         let keys = Object.keys(e);
         keys.forEach((k) => {
-            e[k] = e[k].replace(/�\u0087/g, "Ç");
-            e[k] = e[k].replace(/�\u0095/g, "Õ");
-            e[k] = e[k].replace(/�\u0083/g, "Ã");
+            if (typeof e[k] === "string") {
+                e[k] = e[k].replace(/�/g, "");
+                e[k] = e[k].replace(/\\/g, "");
+                e[k] = e[k].replace(/u0087/g, "Ç");
+                e[k] = e[k].replace(/u0095/g, "Õ");
+                e[k] = e[k].replace(/u0083/g, "Ã");
+            }
         });
     });
     return list;
