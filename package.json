@@ -1,6 +1,6 @@
 {
     "name": "node-sybase-nu",
-    "version": "1.1.10",
+    "version": "2.0.11",
     "description": "packeage base in node-sybase",
     "main": "./dist/node_sybase.js",
     "directories": {
@@ -24,7 +24,9 @@
     "keywords": [
         "nodejs",
         "sybase",
-        "node-sybase"
+        "node-sybase",
+        "JDBC",
+        "Java"
     ],
     "author": "Janiel Oliveira, huangbinglong,  wuhao",
     "license": "ISC",
