@@ -11,7 +11,7 @@
         "generic-pool": "^3.1.7",
         "lodash": "^4.17.4",
         "moment": "^2.18.1",
-        "validator": "^9.0.0"
+        "validator": "^13.7.0"
     },
     "devDependencies": {},
     "scripts": {
